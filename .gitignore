@@ -1,0 +1,10 @@
+teamcity-server-logs/*
+!teamcity-server-logs/.keep
+data_dir/*
+!data_dir/config
+data_dir/config/*
+!data_dir/config/database.properties
+buildserver_pgdata
+!data_dir/config/projects
+
+.idea
