@@ -4,7 +4,7 @@
   <name>_Root Config DSL Script</name>
 
   <properties>
-    <kotlin.version>1.9.10</kotlin.version>
+    <kotlin.version>1.7.22</kotlin.version>
   </properties>
 
 
