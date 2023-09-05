@@ -113,7 +113,10 @@ object WhatsappBusinessJavaApi : Project({
 })
 
 object WhatsappBusinessJavaApi_Build : BuildType({
-    name = "Build"
+    name = "Generate documentation"
+
+    artifactRules = "javadoc => javadoc"
+    publishArtifacts = PublishMode.SUCCESSFUL
 
     vcs {
         root(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
