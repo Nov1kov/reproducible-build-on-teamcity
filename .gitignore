@@ -6,5 +6,8 @@ data_dir/config/*
 !data_dir/config/database.properties
 buildserver_pgdata
 !data_dir/config/projects
-
+data_dir/config/projects/_Root/pluginData/ssh_keys
+# ignore backup versions
+*.xml.*
+# IDE
 .idea

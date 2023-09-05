@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="a71b84a0-8416-40c3-9c70-bf970261de1f" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" parent-id="" uuid="" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
   <name>&lt;Root project&gt;</name>
   <description>Contains all other projects</description>
   <parameters />
@@ -9,6 +9,17 @@
         <param name="startPage" value="coverage.zip!index.html" />
         <param name="title" value="Code Coverage" />
         <param name="type" value="BuildReportTab" />
+      </parameters>
+    </extension>
+    <extension id="PROJECT_EXT_2" type="versionedSettings">
+      <parameters>
+        <param name="buildSettings" value="PREFER_VCS" />
+        <param name="credentialsStorageType" value="credentialsJSON" />
+        <param name="enabled" value="true" />
+        <param name="format" value="kotlin" />
+        <param name="rootId" value="KotlinDsl" />
+        <param name="showChanges" value="false" />
+        <param name="useRelativeIds" value="true" />
       </parameters>
     </extension>
   </project-extensions>
