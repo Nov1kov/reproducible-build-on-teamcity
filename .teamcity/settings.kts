@@ -121,6 +121,10 @@ object WhatsappBusinessJavaApi_Build : BuildType({
     """.trimIndent()
     publishArtifacts = PublishMode.SUCCESSFUL
 
+    params {
+        param("Commit hash", "")
+    }
+
     vcs {
         root(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
     }
