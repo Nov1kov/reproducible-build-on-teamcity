@@ -128,7 +128,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
     steps {
         script {
             name = "javadoc"
-            scriptContent = "mvn javadoc:javadoc"
+            scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
             dockerImage = "maven:3-eclipse-temurin-17"
             dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
         }
