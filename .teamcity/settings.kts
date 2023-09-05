@@ -1,6 +1,8 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
+import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.projectFeatures.buildReportTab
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
@@ -115,6 +117,15 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     vcs {
         root(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
+    }
+
+    steps {
+        script {
+            name = "javadoc"
+            scriptContent = "mvn javadoc:javadoc"
+            dockerImage = "maven:3-eclipse-temurin-17"
+            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
+        }
     }
 
     triggers {
