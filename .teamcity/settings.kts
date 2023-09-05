@@ -46,6 +46,7 @@ project {
         }
     }
 
+    subProject(WhatsappBusinessJavaApi)
     subProject(SimpleJavaMavenApp)
 }
 
@@ -97,5 +98,39 @@ object SimpleJavaMavenApp_HttpsGithubComJenkinsDocsSimpleJavaMavenAppRefsHeadsMa
     name = "https://github.com/jenkins-docs/simple-java-maven-app#refs/heads/master"
     url = "https://github.com/jenkins-docs/simple-java-maven-app"
     branch = "refs/heads/master"
+    branchSpec = "refs/heads/*"
+})
+
+
+object WhatsappBusinessJavaApi : Project({
+    name = "Whatsapp Business Java Api"
+
+    vcsRoot(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
+
+    buildType(WhatsappBusinessJavaApi_Build)
+})
+
+object WhatsappBusinessJavaApi_Build : BuildType({
+    name = "Build"
+
+    vcs {
+        root(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
+    }
+
+    triggers {
+        vcs {
+        }
+    }
+
+    features {
+        perfmon {
+        }
+    }
+})
+
+object WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain : GitVcsRoot({
+    name = "https://github.com/Bindambc/whatsapp-business-java-api.git#refs/heads/main"
+    url = "https://github.com/Bindambc/whatsapp-business-java-api.git"
+    branch = "refs/heads/main"
     branchSpec = "refs/heads/*"
 })
