@@ -73,6 +73,13 @@ object SimpleJavaMavenApp_JavaDocs : BuildType({
             mavenVersion = bundled_3_8()
             jdkHome = "%env.JDK_11_0%"
         }
+        maven {
+            name = "clean (1)"
+            goals = "clean test"
+            runnerArgs = "-Dmaven.test.failure.ignore=true"
+            mavenVersion = bundled_3_8()
+            jdkHome = "%env.JDK_11_0%"
+        }
     }
 
     triggers {
