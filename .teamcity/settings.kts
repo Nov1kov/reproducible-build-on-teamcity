@@ -122,7 +122,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
     publishArtifacts = PublishMode.SUCCESSFUL
 
     params {
-        param("Commit hash", "")
+        param("CommitHash", "")
     }
 
     vcs {
