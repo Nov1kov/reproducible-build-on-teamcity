@@ -74,11 +74,11 @@ object SimpleJavaMavenApp_JavaDocs : BuildType({
             jdkHome = "%env.JDK_11_0%"
         }
         maven {
-            name = "clean (1)"
+            name = "docker clean"
+            executionMode = BuildStep.ExecutionMode.RUN_ON_FAILURE
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             mavenVersion = bundled_3_8()
-            jdkHome = "%env.JDK_11_0%"
         }
     }
 
