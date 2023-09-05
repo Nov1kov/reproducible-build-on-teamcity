@@ -67,6 +67,7 @@ object SimpleJavaMavenApp_JavaDocs : BuildType({
 
     steps {
         maven {
+            name = "clean"
             goals = "clean test"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
             mavenVersion = bundled_3_8()
