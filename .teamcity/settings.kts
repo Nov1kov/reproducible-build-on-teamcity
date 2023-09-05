@@ -115,7 +115,10 @@ object WhatsappBusinessJavaApi : Project({
 object WhatsappBusinessJavaApi_Build : BuildType({
     name = "Generate documentation"
 
-    artifactRules = "javadoc => javadoc.zip"
+    artifactRules = """
+        javadoc => javadoc.zip
+        target/whatsapp-business-java-api-javadoc.jar => whatsapp-business-java-api-javadoc.jar
+    """.trimIndent()
     publishArtifacts = PublishMode.SUCCESSFUL
 
     vcs {
