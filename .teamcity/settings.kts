@@ -135,7 +135,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 
                 echo ${'$'}nearest_tag
                 
-                latest_tag=${'$'}(echo "${'$'}nearest_tag" | rev | cut -d ' ' -f 1 | rev)
+                latest_tag=${'$'}(echo "${'$'}nearest_tag" | tail -n 1)
                 
                 echo ${'$'}latest_tag
             """.trimIndent()
