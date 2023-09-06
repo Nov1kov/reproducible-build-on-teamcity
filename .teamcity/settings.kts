@@ -128,26 +128,6 @@ object WhatsappBusinessJavaApi_Build : BuildType({
     }
 
     steps {
-        script {
-            name = "get release notes"
-            scriptContent = """
-                branch_name="main"
-                
-                nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
-                
-                echo ${'$'}nearest_tag
-                
-                latest_tag=${'$'}(echo "${'$'}nearest_tag" | tail -n 1)
-                
-                echo ${'$'}latest_tag
-            """.trimIndent()
-        }
-        script {
-            name = "javadoc"
-            scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
-            dockerImage = "maven:3-eclipse-temurin-17"
-            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
-        }
         python {
             command = script {
                 content = """
@@ -171,6 +151,26 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             }
             dockerImage = "python:3.10-alpine"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
+        }
+        script {
+            name = "get release notes"
+            scriptContent = """
+                branch_name="main"
+                
+                nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
+                
+                echo ${'$'}nearest_tag
+                
+                latest_tag=${'$'}(echo "${'$'}nearest_tag" | tail -n 1)
+                
+                echo ${'$'}latest_tag
+            """.trimIndent()
+        }
+        script {
+            name = "javadoc"
+            scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
+            dockerImage = "maven:3-eclipse-temurin-17"
+            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
         }
     }
 
