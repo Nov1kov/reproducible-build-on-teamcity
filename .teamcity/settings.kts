@@ -160,12 +160,12 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 
                 nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
                 
-                echo ${'$'}nearest_tag
-                
                 latest_tag=${'$'}(echo "${'$'}nearest_tag" | tail -n 1)
                 
                 echo ${'$'}latest_tag
             """.trimIndent()
+            dockerImage = "python:3.10"
+            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
         }
         script {
             name = "javadoc"
