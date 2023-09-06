@@ -149,7 +149,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                         print(nearest_tag)
                 """.trimIndent()
             }
-            dockerImage = "python:3.10-alpine"
+            dockerImage = "python:3.10"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
         }
         script {
