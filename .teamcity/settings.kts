@@ -132,8 +132,11 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             command = script {
                 content = """
                     import subprocess
+                    import os
                     
                     def get_nearest_tag(branch_name, commit_hash):
+                      	print(os.environ)
+                        print('%teamcity.build.checkoutDir%')
                         result = subprocess.run(["git", "describe", "--tags", "--abbrev=0", branch_name, commit_hash],
                                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
                         print(result.stderr.strip())
