@@ -159,6 +159,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             scriptContent = """
                 branch_name="main"
                 
+                git config --global --add safe.directory %teamcity.build.checkoutDir%
                 nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
                 
                 latest_tag=${'$'}(echo "${'$'}nearest_tag" | tail -n 1)
