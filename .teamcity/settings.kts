@@ -136,8 +136,9 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 branch_name="main"
                 
                 nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
+                latest_tag=${'$'}(echo "${'$'}nearest_tag" | rev | cut -d ' ' -f 1 | rev)
                 
-                echo ${'$'}nearest_tag
+                echo ${'$'}latest_tag
             """.trimIndent()
         }
         script {
