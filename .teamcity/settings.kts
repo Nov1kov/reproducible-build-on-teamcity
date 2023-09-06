@@ -1,7 +1,9 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
+import jetbrains.buildServer.configs.kotlin.buildSteps.PythonBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.buildSteps.python
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.projectFeatures.buildReportTab
 import jetbrains.buildServer.configs.kotlin.triggers.vcs
@@ -145,6 +147,30 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
             dockerImage = "maven:3-eclipse-temurin-17"
             dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
+        }
+        python {
+            command = script {
+                content = """
+                    import subprocess
+                    
+                    def get_nearest_tag(branch_name, commit_hash):
+                        result = subprocess.run(["git", "describe", "--tags", "--abbrev=0", branch_name, commit_hash],
+                                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+                        nearest_tag = result.stdout.strip()
+                    
+                        if not nearest_tag:
+                            raise Exception("Tag isn't found!")
+                    
+                    if __name__ == "__main__":
+                        branch_name = "main"
+                        commit_hash = "HEAD"
+                        
+                        nearest_tag = get_nearest_tag(branch_name, commit_hash)
+                        print(nearest_tag)
+                """.trimIndent()
+            }
+            dockerImage = "python:3.10-alpine"
+            dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
         }
     }
 
