@@ -131,6 +131,16 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     steps {
         script {
+            name = "get release notes"
+            scriptContent = """
+                branch_name="main"
+                
+                nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
+                
+                echo ${'$'}nearest_tag
+            """.trimIndent()
+        }
+        script {
             name = "javadoc"
             scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
             dockerImage = "maven:3-eclipse-temurin-17"
