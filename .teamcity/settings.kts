@@ -135,7 +135,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                     
                     def get_nearest_tag(branch_name, commit_hash):
                         result = subprocess.run(["git", "describe", "--tags", "--abbrev=0", branch_name, commit_hash],
-                                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
+                                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=False)
                         print(result.stderr.strip())
                         nearest_tag = result.stdout.strip()
                     
