@@ -126,7 +126,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                             f.write(notes)
                     
                     if __name__ == "__main__":
-                        latest_tag = get_latest_tag(branch_name, commit_hash)
+                        latest_tag = get_latest_tag()
                         release_notes = get_release_notes(latest_tag)
                         if release_notes:
                             write_notes(release_notes)
