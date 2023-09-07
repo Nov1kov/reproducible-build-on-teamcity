@@ -2,7 +2,6 @@ import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildSteps.PythonBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
-import jetbrains.buildServer.configs.kotlin.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.buildSteps.python
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.projectFeatures.buildReportTab
@@ -51,59 +50,7 @@ project {
     }
 
     subProject(WhatsappBusinessJavaApi)
-    subProject(SimpleJavaMavenApp)
 }
-
-
-object SimpleJavaMavenApp : Project({
-    name = "Simple Java Maven App"
-
-    vcsRoot(SimpleJavaMavenApp_HttpsGithubComJenkinsDocsSimpleJavaMavenAppRefsHeadsMaster)
-
-    buildType(SimpleJavaMavenApp_JavaDocs)
-})
-
-object SimpleJavaMavenApp_JavaDocs : BuildType({
-    name = "JavaDocs"
-
-    vcs {
-        root(SimpleJavaMavenApp_HttpsGithubComJenkinsDocsSimpleJavaMavenAppRefsHeadsMaster)
-    }
-
-    steps {
-        maven {
-            name = "docker clean"
-            executionMode = BuildStep.ExecutionMode.RUN_ON_FAILURE
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
-            mavenVersion = bundled_3_8()
-        }
-        maven {
-            name = "clean"
-            goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
-            mavenVersion = bundled_3_8()
-            jdkHome = "%env.JDK_11_0%"
-        }
-    }
-
-    triggers {
-        vcs {
-        }
-    }
-
-    features {
-        perfmon {
-        }
-    }
-})
-
-object SimpleJavaMavenApp_HttpsGithubComJenkinsDocsSimpleJavaMavenAppRefsHeadsMaster : GitVcsRoot({
-    name = "https://github.com/jenkins-docs/simple-java-maven-app#refs/heads/master"
-    url = "https://github.com/jenkins-docs/simple-java-maven-app"
-    branch = "refs/heads/master"
-    branchSpec = "refs/heads/*"
-})
 
 
 object WhatsappBusinessJavaApi : Project({
