@@ -139,18 +139,22 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
                         result = subprocess.run(["git", "describe", "--tags", "--abbrev=0", branch_name, commit_hash],
                                                  stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
-                        print(result.stderr.strip())
+                    
                         nearest_tag = result.stdout.strip()
                     
                         if not nearest_tag:
-                            raise Exception("Tag isn't found!")
+                            raise Exception("Tag not found!")
+                        
+                        latest_tag = nearest_tag.split('\n')[-1]
+                        
+                        return latest_tag
                     
                     if __name__ == "__main__":
                         branch_name = "main"
                         commit_hash = "HEAD"
                         
-                        nearest_tag = get_nearest_tag(branch_name, commit_hash)
-                        print(nearest_tag)
+                        latest_tag = get_nearest_tag(branch_name, commit_hash)
+                        print(latest_tag)
                 """.trimIndent()
             }
             dockerImage = "python:3.10"
