@@ -3,6 +3,7 @@ teamcity-server-logs/*
 teamcity-server-data/*
 !teamcity-server-data/config
 teamcity-server-data/config/*
+!teamcity-server-data/config/main-config.xml
 !teamcity-server-data/config/database.properties
 buildserver_pgdata
 !teamcity-server-data/config/projects
