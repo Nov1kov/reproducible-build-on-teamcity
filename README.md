@@ -20,3 +20,10 @@
 - **teamcity-server-logs** - здесь будут логи от teamcity server.
 - **marketing-website** - nginx сервер с заготовленными данными.
 
+### Job build documentation
+```mermaid
+flowchart TD
+    A[Get release notes] -->|release_notes.txt| B(Build javadoc)
+    B -->|javadoc.zip| D(( ))
+```
+
