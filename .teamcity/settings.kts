@@ -137,23 +137,6 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             dockerRunParameters = """--network="host""""
         }
         script {
-            name = "get release notes"
-            enabled = false
-            executionMode = BuildStep.ExecutionMode.RUN_ON_FAILURE
-            scriptContent = """
-                branch_name="main"
-                
-                git config --global --add safe.directory %teamcity.build.checkoutDir%
-                nearest_tag=${'$'}(git describe --tags --abbrev=0 "${'$'}branch_name" HEAD)
-                
-                latest_tag=${'$'}(echo "${'$'}nearest_tag" | tail -n 1)
-                
-                echo ${'$'}latest_tag
-            """.trimIndent()
-            dockerImage = "python:3.10"
-            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
-        }
-        script {
             name = "javadoc"
             scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
             dockerImage = "maven:3-eclipse-temurin-17"
