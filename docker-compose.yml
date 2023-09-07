@@ -1,14 +1,5 @@
 version: '3.1'
 
-
-# Default ${TEAMCITY_VERSION} is defined in .env file
-
-# ./buildserver_pgdata - Posgres DB data
-# ./data_dir - TeamCity data directory
-# ./teamcity-server-logs - logs of primary TeamCity server
-# ./agents/agent-1/conf - configuration directory for the first build agent
-# ./agents/agent-1/conf - configuration directory for the second build agent
-
 services:
   db:
     image: postgres:latest
