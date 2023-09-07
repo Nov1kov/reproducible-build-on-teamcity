@@ -28,7 +28,7 @@ services:
     ports:
       - "8112:8111"
     volumes:
-      - ./data_dir:/data/teamcity_server/datadir
+      - ./teamcity-server-data:/data/teamcity_server/datadir
       - ./teamcity-server-logs:/opt/teamcity/logs
     depends_on:
       - db
@@ -37,7 +37,7 @@ services:
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION}-linux-sudo
     privileged: true
     volumes:
-      - ./agents/agent-1/conf:/data/teamcity_agent/conf
+      - ./teamcity-agent-conf:/data/teamcity_agent/conf
     environment:
       - DOCKER_IN_DOCKER=start
 

@@ -1,12 +1,12 @@
 teamcity-server-logs/*
 !teamcity-server-logs/.keep
-data_dir/*
-!data_dir/config
-data_dir/config/*
-!data_dir/config/database.properties
+teamcity-server-data/*
+!teamcity-server-data/config
+teamcity-server-data/config/*
+!teamcity-server-data/config/database.properties
 buildserver_pgdata
-!data_dir/config/projects
-data_dir/config/projects/_Root/pluginData/ssh_keys
+!teamcity-server-data/config/projects
+teamcity-server-data/config/projects/_Root/pluginData/ssh_keys
 # ignore backup versions
 *.xml.*
 # IDE
