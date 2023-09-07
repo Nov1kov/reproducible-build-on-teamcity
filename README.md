@@ -27,3 +27,23 @@ flowchart TD
     B -->|javadoc.zip| D(( ))
 ```
 
+### Choosing release notes
+
+Версия для release notes берется из самого последнего известного тага для данного коммита.
+
+В случае самого последнего **commit 3**, берется текущая версия **v3.3**
+```mermaid
+flowchart LR
+    A(( commit 1 \n v3.2)) --> B((commit 2))
+    B --> C((commit 3\n v3.3))
+    style C fill:#f9f
+```
+
+В случае **commit 2** последнего коммита будет версия **v3.2**
+
+```mermaid
+flowchart LR
+A(( commit 1 \n v3.2)) --> B((commit 2))
+B --> C((commit 3\n v3.3))
+style B fill:#f9f
+```
