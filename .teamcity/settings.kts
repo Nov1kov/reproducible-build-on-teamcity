@@ -158,6 +158,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
         }
         script {
             name = "get release notes"
+            enabled = false
             executionMode = BuildStep.ExecutionMode.RUN_ON_FAILURE
             scriptContent = """
                 branch_name="main"
