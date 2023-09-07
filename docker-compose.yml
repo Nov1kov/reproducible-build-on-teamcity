@@ -40,3 +40,11 @@ services:
       - ./agents/agent-1/conf:/data/teamcity_agent/conf
     environment:
       - DOCKER_IN_DOCKER=start
+
+  marketing:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./marketing-website/nginx.conf:/etc/nginx/nginx.conf
+      - ./marketing-website/release-notes-response.json:/usr/share/nginx/html/release-notes-response.json
