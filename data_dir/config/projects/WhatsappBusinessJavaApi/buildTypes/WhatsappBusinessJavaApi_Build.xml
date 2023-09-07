@@ -1,15 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="f855e9a0-7925-4fbf-9397-9797a14021de" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
-  <name>Build</name>
+<build-type xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="" xsi:noNamespaceSchemaLocation="https://www.jetbrains.com/teamcity/schemas/2021.1/project-config.xsd">
+  <name>Generate documentation</name>
   <description />
   <settings>
+    <options>
+      <option name="artifactRules" value="javadoc =&gt; javadoc.zip&#xA;release_notes.txt =&gt; javadoc.zip&#xA;target/whatsapp-business-java-api-javadoc.jar =&gt; whatsapp-business-java-api-javadoc.jar" />
+      <option name="publishArtifactCondition" value="SUCCESSFUL" />
+    </options>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_3" name="javadoc" type="simpleRunner">
+      <runner id="RUNNER_1" name="" type="python-runner">
+        <parameters>
+          <param name="command" value="script" />
+          <param name="coverageArgs" value="--omit=*lib*" />
+          <param name="envTool" value="none" />
+          <param name="installToolPackage" value="true" />
+          <param name="isCoverageEnabled" value="false" />
+          <param name="isTestReportingEnabled" value="true" />
+          <param name="plugin.docker.imageId" value="python:3.10" />
+          <param name="plugin.docker.imagePlatform" value="linux" />
+          <param name="plugin.docker.run.parameters" value="--network=&quot;host&quot;" />
+          <param name="poetryExecutable" value="poetry" />
+          <param name="pythonVersion" value="python3" />
+          <param name="scriptContent"><![CDATA[import http.client
+import json
+import os
+import subprocess
+
+MARKETING_WEBSITE_URL = 'marketing'
+RELEASE_NOTES_FILENAME = 'release_notes.txt'
+DEFAULT_BRANCH_NAME = 'main'
+
+def get_latest_tag():
+    subprocess.run(['git', 'config', '--global', '--add', 'safe.directory', '%teamcity.build.checkoutDir%'],
+                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+    result = subprocess.run(["git", "describe", "--tags", "--abbrev=0", DEFAULT_BRANCH_NAME, 'HEAD'],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, check=True)
+
+    nearest_tag = result.stdout.strip()
+
+    if not nearest_tag:
+        raise Exception("Tag not found!")
+
+    latest_tag = nearest_tag.split('\n')[-1]
+
+    return latest_tag
+
+def get_release_notes(version):
+    try:
+        conn = http.client.HTTPConnection(MARKETING_WEBSITE_URL, port=80)
+        conn.request("GET", "/releasenotes")
+        response = conn.getresponse()
+
+        if response.status == 200:
+            response_data = response.read()
+            json_data = json.loads(response_data.decode("utf-8"))
+
+            return json_data[version]
+        else:
+            print(f"HTTP GET request failed with status code {response.status}")
+            return None
+
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        return None
+
+def write_notes(notes):
+    with open(RELEASE_NOTES_FILENAME, 'w+') as f:
+        f.write(notes)
+
+if __name__ == "__main__":
+    latest_tag = get_latest_tag()
+    release_notes = get_release_notes(latest_tag)
+    if release_notes:
+        write_notes(release_notes)]]></param>
+          <param name="teamcity.step.mode" value="default" />
+          <param name="virtualenvEnvName" value=".venv" />
+          <param name="virtualenvFile" value="requirements.txt" />
+        </parameters>
+      </runner>
+      <runner id="RUNNER_2" name="javadoc" type="simpleRunner">
         <parameters>
           <param name="plugin.docker.imageId" value="maven:3-eclipse-temurin-17" />
           <param name="plugin.docker.imagePlatform" value="linux" />
-          <param name="script.content" value="mvn javadoc:javadoc" />
+          <param name="script.content" value="mvn clean javadoc:javadoc javadoc:jar" />
           <param name="teamcity.step.mode" value="default" />
           <param name="use.custom.script" value="true" />
         </parameters>
@@ -20,7 +94,7 @@
     </vcs-settings>
     <requirements />
     <build-triggers>
-      <build-trigger id="TRIGGER_2" type="vcsTrigger">
+      <build-trigger id="TRIGGER_1" type="vcsTrigger">
         <parameters>
           <param name="branchFilter" value="+:*" />
           <param name="enableQueueOptimization" value="true" />
@@ -29,7 +103,7 @@
       </build-trigger>
     </build-triggers>
     <build-extensions>
-      <extension id="perfmon" type="perfmon">
+      <extension id="BUILD_EXT_1" type="perfmon">
         <parameters>
           <param name="teamcity.perfmon.feature.enabled" value="true" />
         </parameters>
