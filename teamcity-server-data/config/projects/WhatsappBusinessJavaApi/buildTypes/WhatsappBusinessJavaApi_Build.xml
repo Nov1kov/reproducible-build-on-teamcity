@@ -9,7 +9,7 @@
     </options>
     <parameters />
     <build-runners>
-      <runner id="RUNNER_1" name="" type="python-runner">
+      <runner id="RUNNER_1" name="Get release notes" type="python-runner">
         <parameters>
           <param name="command" value="script" />
           <param name="coverageArgs" value="--omit=*lib*" />
@@ -79,7 +79,7 @@ if __name__ == "__main__":
           <param name="virtualenvFile" value="requirements.txt" />
         </parameters>
       </runner>
-      <runner id="RUNNER_2" name="javadoc" type="simpleRunner">
+      <runner id="RUNNER_2" name="Build Javadoc" type="simpleRunner">
         <parameters>
           <param name="plugin.docker.imageId" value="maven:3-eclipse-temurin-17" />
           <param name="plugin.docker.imagePlatform" value="linux" />
@@ -93,19 +93,16 @@ if __name__ == "__main__":
       <vcs-entry-ref root-id="WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain" />
     </vcs-settings>
     <requirements />
-    <build-triggers>
-      <build-trigger id="TRIGGER_1" type="vcsTrigger">
-        <parameters>
-          <param name="branchFilter" value="+:*" />
-          <param name="enableQueueOptimization" value="true" />
-          <param name="quietPeriodMode" value="DO_NOT_USE" />
-        </parameters>
-      </build-trigger>
-    </build-triggers>
+    <build-triggers />
     <build-extensions>
       <extension id="BUILD_EXT_1" type="perfmon">
         <parameters>
           <param name="teamcity.perfmon.feature.enabled" value="true" />
+        </parameters>
+      </extension>
+      <extension id="BUILD_EXT_2" type="swabra">
+        <parameters>
+          <param name="swabra.enabled" value="swabra.before.build" />
         </parameters>
       </extension>
     </build-extensions>
