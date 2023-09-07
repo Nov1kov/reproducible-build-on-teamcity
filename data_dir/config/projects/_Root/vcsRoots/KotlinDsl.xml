@@ -3,12 +3,11 @@
   <name>kotlin dsl</name>
   <param name="agentCleanFilesPolicy" value="ALL_UNTRACKED" />
   <param name="agentCleanPolicy" value="ON_BRANCH_CHANGE" />
-  <param name="authMethod" value="TEAMCITY_SSH_KEY" />
+  <param name="authMethod" value="ANONYMOUS" />
   <param name="branch" value="master" />
   <param name="ignoreKnownHosts" value="true" />
   <param name="submoduleCheckout" value="CHECKOUT" />
-  <param name="teamcitySshKey" value="teamcity" />
-  <param name="url" value="git@github.com:Nov1kov/teamcity_kotlin_dsl.git" />
+  <param name="url" value="https://github.com/Nov1kov/teamcity_kotlin_dsl.git" />
   <param name="useAlternates" value="AUTO" />
   <param name="usernameStyle" value="USERID" />
 </vcs-root>
