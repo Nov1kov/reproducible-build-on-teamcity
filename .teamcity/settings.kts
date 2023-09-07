@@ -52,12 +52,26 @@ project {
     subProject(WhatsappBusinessJavaApi)
 }
 
+
 object WhatsappBusinessJavaApi : Project({
     name = "Whatsapp Business Java Api"
 
     vcsRoot(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
 
     buildType(WhatsappBusinessJavaApi_Build)
+
+    features {
+        buildReportTab {
+            id = "PROJECT_EXT_3"
+            title = "Documentation"
+            startPage = "javadoc.zip!/index.html"
+        }
+        buildReportTab {
+            id = "PROJECT_EXT_4"
+            title = "Release notes"
+            startPage = "javadoc.zip!/release_notes.txt"
+        }
+    }
 })
 
 object WhatsappBusinessJavaApi_Build : BuildType({
@@ -127,6 +141,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                     
                     if __name__ == "__main__":
                         latest_tag = get_latest_tag()
+                        print(f"##teamcity[setParameter name='env.CURRENT_VERSION' value='{latest_tag}']")
                         release_notes = get_release_notes(latest_tag)
                         if release_notes:
                             write_notes(release_notes)
