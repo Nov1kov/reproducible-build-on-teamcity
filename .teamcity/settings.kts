@@ -66,6 +66,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     artifactRules = """
         javadoc => javadoc.zip
+        release_notes.txt => javadoc.zip
         target/whatsapp-business-java-api-javadoc.jar => whatsapp-business-java-api-javadoc.jar
     """.trimIndent()
     publishArtifacts = PublishMode.SUCCESSFUL
