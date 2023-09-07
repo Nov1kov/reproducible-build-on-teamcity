@@ -90,6 +90,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     steps {
         python {
+            name = "Get release notes"
             command = script {
                 content = """
                     import http.client
@@ -141,7 +142,6 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                     
                     if __name__ == "__main__":
                         latest_tag = get_latest_tag()
-                        print(f"##teamcity[setParameter name='env.CURRENT_VERSION' value='{latest_tag}']")
                         release_notes = get_release_notes(latest_tag)
                         if release_notes:
                             write_notes(release_notes)
@@ -152,7 +152,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             dockerRunParameters = """--network="host""""
         }
         script {
-            name = "javadoc"
+            name = "Build Javadoc"
             scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
             dockerImage = "maven:3-eclipse-temurin-17"
             dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
