@@ -83,7 +83,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                     import os
                     import subprocess
                     
-                    MARKETING_WEBSITE_URL = 'localhost'
+                    MARKETING_WEBSITE_URL = 'marketing'
                     RELEASE_NOTES_FILENAME = 'release_notes.txt'
                     DEFAULT_BRANCH_NAME = 'main'
                     
