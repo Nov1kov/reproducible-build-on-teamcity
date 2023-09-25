@@ -7,6 +7,11 @@ teamcity-server-data/config/*
 !teamcity-server-data/config/database.properties
 buildserver_pgdata
 !teamcity-server-data/config/projects
+teamcity-server-data/config/projects/*
+!teamcity-server-data/config/projects/_Root
+teamcity-server-data/config/projects/_Root/*
+!teamcity-server-data/config/projects/_Root/vcsRoots
+!teamcity-server-data/config/projects/_Root/project-config.xml
 teamcity-server-data/config/projects/_Root/pluginData/ssh_keys
 # ignore backup versions
 *.xml.*

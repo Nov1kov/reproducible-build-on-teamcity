@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
 
-  teamcity-agent-1:
+  teamcity-agent:
     image: jetbrains/teamcity-agent:${TEAMCITY_VERSION}-linux-sudo
     privileged: true
     volumes:
