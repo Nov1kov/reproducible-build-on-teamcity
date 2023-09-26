@@ -115,8 +115,8 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 })
 
 object WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain : GitVcsRoot({
-    name = "https://github.com/Bindambc/whatsapp-business-java-api.git#refs/heads/main"
-    url = "https://github.com/Bindambc/whatsapp-business-java-api.git"
+    name = "Javadoc example"
+    url = "https://github.com/Nov1kov/javadoc-example.git"
     branch = "refs/heads/main"
     branchSpec = "refs/heads/*"
 })
