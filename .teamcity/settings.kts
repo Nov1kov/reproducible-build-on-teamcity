@@ -1,5 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
+import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.swabra
 import jetbrains.buildServer.configs.kotlin.buildSteps.PythonBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
@@ -110,6 +112,16 @@ object WhatsappBusinessJavaApi_Build : BuildType({
         perfmon {
         }
         swabra {
+        }
+        pullRequests {
+            vcsRootExtId = "${WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain.id}"
+            provider = github {
+                authType = token {
+                    token = "credentialsJSON:99a9421e-b846-4c57-b0bd-e2f5ba86ac6b"
+                }
+                filterTargetBranch = "main"
+                filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
+            }
         }
     }
 })
