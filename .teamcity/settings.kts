@@ -60,6 +60,7 @@ object WhatsappBusinessJavaApi : Project({
 
     vcsRoot(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
 
+    buildType(WhatsappBusinessJavaApi_CheckReleaseNotes)
     buildType(WhatsappBusinessJavaApi_Build)
 
     features {
@@ -78,6 +79,56 @@ object WhatsappBusinessJavaApi : Project({
 
 object WhatsappBusinessJavaApi_Build : BuildType({
     name = "Generate documentation"
+
+    artifactRules = """
+        javadoc => javadoc.zip
+        release_notes.txt => javadoc.zip
+        target/whatsapp-business-java-api-javadoc.jar => whatsapp-business-java-api-javadoc.jar
+    """.trimIndent()
+    publishArtifacts = PublishMode.SUCCESSFUL
+
+    vcs {
+        root(WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain)
+    }
+
+    steps {
+        python {
+            name = "Get release notes"
+            command = file {
+                filename = "ci.py"
+            }
+            dockerImage = "python:3.10"
+            dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
+            dockerRunParameters = """--network="host""""
+        }
+        script {
+            name = "Build Javadoc"
+            scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
+            dockerImage = "maven:3-eclipse-temurin-17"
+            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
+        }
+    }
+
+    features {
+        perfmon {
+        }
+        swabra {
+        }
+        pullRequests {
+            vcsRootExtId = "${WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain.id}"
+            provider = github {
+                authType = token {
+                    token = "credentialsJSON:99a9421e-b846-4c57-b0bd-e2f5ba86ac6b"
+                }
+                filterTargetBranch = "main"
+                filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
+            }
+        }
+    }
+})
+
+object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
+    name = "Check release notes"
 
     artifactRules = """
         javadoc => javadoc.zip
