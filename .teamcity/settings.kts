@@ -95,7 +95,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     steps {
         python {
-            name = "Get release notes (1)"
+            name = "test python script"
             command = script {
                 content = """
                     import http.client
