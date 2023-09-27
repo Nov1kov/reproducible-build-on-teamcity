@@ -102,7 +102,9 @@ object WhatsappBusinessJavaApi_Build : BuildType({
         script {
             name = "Build Javadoc"
             scriptContent = """
-                mvn clean javadoc:javadoc javadoc:jar
+                mvn clean javadoc:javadoc
+                
+                mv release_notes.txt javadoc/.
                 
                 apt-get update && apt-get install zip -y --no-install-recommends
                 zip -r javadoc.zip javadoc
