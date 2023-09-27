@@ -84,7 +84,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     artifactRules = """
         javadoc.zip => javadoc.zip
-        checksum.txt => checksum.txt
+        checksum.txt
     """.trimIndent()
     publishArtifacts = PublishMode.SUCCESSFUL
 
