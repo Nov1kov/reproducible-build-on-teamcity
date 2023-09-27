@@ -155,8 +155,6 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
     features {
         perfmon {
         }
-        swabra {
-        }
         pullRequests {
             vcsRootExtId = "${WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain.id}"
             provider = github {
