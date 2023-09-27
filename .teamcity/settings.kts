@@ -82,7 +82,10 @@ object WhatsappBusinessJavaApi : Project({
 object WhatsappBusinessJavaApi_Build : BuildType({
     name = "Generate documentation"
 
-    artifactRules = "javadoc.zip => javadoc.zip"
+    artifactRules = """
+        javadoc.zip => javadoc.zip
+        checksum.txt => checksum.txt
+    """.trimIndent()
     publishArtifacts = PublishMode.SUCCESSFUL
 
     vcs {
