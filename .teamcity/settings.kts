@@ -1,5 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildFeatures.PullRequests
+import jetbrains.buildServer.configs.kotlin.buildFeatures.commitStatusPublisher
 import jetbrains.buildServer.configs.kotlin.buildFeatures.perfmon
 import jetbrains.buildServer.configs.kotlin.buildFeatures.pullRequests
 import jetbrains.buildServer.configs.kotlin.buildFeatures.swabra
@@ -148,6 +149,15 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
                     token = "credentialsJSON:99a9421e-b846-4c57-b0bd-e2f5ba86ac6b"
                 }
                 filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
+            }
+        }
+        commitStatusPublisher {
+            vcsRootExtId = "${WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitRefsHeadsMain.id}"
+            publisher = github {
+                githubUrl = "https://api.github.com"
+                authType = personalToken {
+                    token = "credentialsJSON:09b57b58-8461-42e6-a7cc-f9d6d7183a3e"
+                }
             }
         }
     }
