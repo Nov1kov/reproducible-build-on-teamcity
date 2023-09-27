@@ -105,11 +105,17 @@ object WhatsappBusinessJavaApi_Build : BuildType({
         script {
             name = "Build Javadoc"
             scriptContent = """
+                #!/bin/bash
+                set -e
+                
+                # generate documentation
                 mvn clean javadoc:javadoc
                 
+                # add release notes to archive
                 mv release_notes.txt javadoc/.
                 
-                # reset timestamp
+                # reset timestamps
+                git config --global --add safe.directory %teamcity.build.checkoutDir%
                 commit_time=${'$'}(git log -1 --format="%ct" HEAD)
                 find javadoc -print0 | xargs -0r touch --no-dereference --date="@${'$'}commit_time"
                 
