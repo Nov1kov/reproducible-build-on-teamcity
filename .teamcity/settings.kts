@@ -241,7 +241,7 @@ object WhatsappBusinessJavaApi_HttpsGithubComBindambcWhatsappBusinessJavaApiGitR
     url = "https://github.com/Nov1kov/javadoc-example.git"
     branch = "refs/heads/main"
     branchSpec = """
-        refs/heads/*
-        # +:refs/heads/main
+        #refs/heads/*
+        +:refs/heads/main
     """.trimIndent()
 })
