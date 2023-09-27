@@ -95,15 +95,6 @@ object WhatsappBusinessJavaApi_Build : BuildType({
 
     steps {
         python {
-            name = "Get release notes"
-            command = file {
-                filename = "ci.py"
-                scriptArguments = "--get-release-notes"
-            }
-            dockerImage = "python:3.10"
-            dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
-        }
-        python {
             name = "Get release notes (1)"
             command = script {
                 content = """
@@ -169,6 +160,15 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             dockerImage = "python:3.10"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
             dockerRunParameters = """--network="host""""
+        }
+        python {
+            name = "Get release notes"
+            command = file {
+                filename = "ci.py"
+                scriptArguments = "--get-release-notes"
+            }
+            dockerImage = "python:3.10"
+            dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
         }
         script {
             name = "Build Javadoc"
