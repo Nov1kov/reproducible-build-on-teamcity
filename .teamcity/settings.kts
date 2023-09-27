@@ -102,7 +102,6 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             }
             dockerImage = "python:3.10"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
-            dockerRunParameters = """--network="host""""
         }
         python {
             name = "Get release notes (1)"
