@@ -144,12 +144,6 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
             dockerRunParameters = """--network="host""""
         }
-        script {
-            name = "Build Javadoc"
-            scriptContent = "mvn clean javadoc:javadoc javadoc:jar"
-            dockerImage = "maven:3-eclipse-temurin-17"
-            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
-        }
     }
 
     features {
