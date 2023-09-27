@@ -198,7 +198,7 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
             name = "Compare release notes"
             command = file {
                 filename = "ci.py"
-                scriptArguments = "--compare-release-notes --branch %teamcity.pullRequest.source.branch%"
+                scriptArguments = "--compare-release-notes"
             }
             dockerImage = "python:3.10"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
