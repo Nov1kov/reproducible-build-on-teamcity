@@ -108,7 +108,8 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 
                 apt-get update && apt-get install zip -y --no-install-recommends
                 zip -r javadoc.zip javadoc
-                sha256sum javadoc.zip
+                sha256sum javadoc.zip > checksum.txt
+                cat checksum.txt
             """.trimIndent()
             dockerImage = "maven:3-eclipse-temurin-17"
             dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
