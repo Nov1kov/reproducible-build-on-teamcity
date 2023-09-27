@@ -96,6 +96,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
             name = "Get release notes"
             command = file {
                 filename = "ci.py"
+                scriptArguments = "--get-release-notes"
             }
             dockerImage = "python:3.10"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
