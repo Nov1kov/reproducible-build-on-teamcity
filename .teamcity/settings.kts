@@ -9,6 +9,7 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
 import jetbrains.buildServer.configs.kotlin.buildSteps.python
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.projectFeatures.buildReportTab
+import jetbrains.buildServer.configs.kotlin.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.vcs.GitVcsRoot
 
 /*
@@ -136,6 +137,11 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
             dockerImage = "python:3.10"
             dockerImagePlatform = PythonBuildStep.ImagePlatform.Linux
             dockerRunParameters = """--network="host""""
+        }
+    }
+
+    triggers {
+        vcs {
         }
     }
 
