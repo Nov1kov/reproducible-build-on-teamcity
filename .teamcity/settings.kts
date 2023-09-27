@@ -117,6 +117,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 # reset timestamps
                 git config --global --add safe.directory %teamcity.build.checkoutDir%
                 commit_time=${'$'}(git log -1 --format="%ct" HEAD)
+                echo ${'$'}commit_time
                 find javadoc -print0 | xargs -0r touch --no-dereference --date="@${'$'}commit_time"
                 
                 # archive documentation
