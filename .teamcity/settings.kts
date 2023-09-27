@@ -147,7 +147,6 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
                 authType = token {
                     token = "credentialsJSON:99a9421e-b846-4c57-b0bd-e2f5ba86ac6b"
                 }
-                filterTargetBranch = "main"
                 filterAuthorRole = PullRequests.GitHubRoleFilter.EVERYBODY
             }
         }
