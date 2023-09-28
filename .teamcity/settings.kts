@@ -162,7 +162,6 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
 
     triggers {
         vcs {
-            enabled = false
             branchFilter = """
                 +:*
                 -:main
