@@ -114,17 +114,14 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 # add release notes to archive
                 mv release_notes.txt javadoc/.
                 
-                # reset timestamps
-                git config --global --add safe.directory %teamcity.build.checkoutDir%
-                commit_time=${'$'}(git log -1 --format="%ct" HEAD)
-                echo ${'$'}commit_time
-                find javadoc -print0 | xargs -0r touch --no-dereference --date="@${'$'}commit_time"
-                
                 # archive documentation
-                apt-get update && apt-get install zip -y --no-install-recommends
+                apt-get update && apt-get install zip strip-nondeterminism -y --no-install-recommends
                 cd javadoc
                 zip -r ../javadoc.zip *
                 cd ..
+                
+                # strip-nondeterminism
+                strip-nondeterminism javadoc.zip
                 
                 # checksum
                 sha256sum javadoc.zip > checksum.txt
