@@ -164,7 +164,7 @@ object WhatsappBusinessJavaApi_CheckReleaseNotes : BuildType({
         vcs {
             branchFilter = """
                 +:*
-                -:main
+                -:<default>
             """.trimIndent()
         }
     }
