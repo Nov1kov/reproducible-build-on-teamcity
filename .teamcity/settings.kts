@@ -122,7 +122,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 
                 # archive documentation
                 apt-get update && apt-get install zip -y --no-install-recommends
-                zip -r javadoc.zip javadoc
+                zip -rj javadoc.zip javadoc
                 
                 # checksum
                 sha256sum javadoc.zip > checksum.txt
