@@ -74,7 +74,7 @@ object WhatsappBusinessJavaApi : Project({
         buildReportTab {
             id = "PROJECT_EXT_4"
             title = "Release notes"
-            startPage = "target/whatsapp-business-java-api-javadoc.jar!/release_notes.txt"
+            startPage = "whatsapp-business-java-api-javadoc.jar!/release_notes.txt"
         }
     }
 })
