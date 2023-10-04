@@ -69,7 +69,7 @@ object WhatsappBusinessJavaApi : Project({
         buildReportTab {
             id = "PROJECT_EXT_3"
             title = "Documentation"
-            startPage = "target/whatsapp-business-java-api-javadoc.jar!/index.html"
+            startPage = "whatsapp-business-java-api-javadoc.jar!/index.html"
         }
         buildReportTab {
             id = "PROJECT_EXT_4"
