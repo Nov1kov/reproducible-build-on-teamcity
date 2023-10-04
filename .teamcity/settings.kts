@@ -113,7 +113,7 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 
                 # get cuurrent time of commit
                 git config --global --add safe.directory %teamcity.build.checkoutDir%
-                commit_time=${'$'}(git log -1 --format="%ad" --date=format-local:"%Y-%m-%dT%H:%M:%SZ" HEAD)
+                commit_time=${'$'}(git log -1 --format="%%ad" --date=format-local:"%%Y-%%m-%%dT%%H:%%M:%%SZ" HEAD)
                 
                 # generate documentation
                 mvn clean javadoc:jar -Dproject.build.outputTimestamp="${'$'}{commit_time}"
