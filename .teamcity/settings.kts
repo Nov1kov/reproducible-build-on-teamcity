@@ -108,21 +108,24 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 #!/bin/bash
                 set -e
                 
+                ARTIFACT_PATH=target/whatsapp-business-java-api-javadoc.jar
+                RELEASE_NOTES_PATH=release_notes.txt
+                
                 # get cuurrent time of commit
                 git config --global --add safe.directory %teamcity.build.checkoutDir%
-                commit_time=${'$'}(git log -1 --format="%ai" HEAD)
+                commit_time=${'$'}(git log -1 --format="%ad" --date=format-local:"%Y-%m-%dT%H:%M:%SZ" HEAD)
                 
                 # generate documentation
                 mvn clean javadoc:jar -Dproject.build.outputTimestamp="${'$'}{commit_time}"
                 
                 # change data modify in release_notes file
-                touch -d "${'$'}{commit_time}" release_notes.txt
+                touch -d "${'$'}{commit_time}" ${'$'}RELEASE_NOTES_PATH
                 
                 # add release notes to archive
-                jar uf target/whatsapp-business-java-api-javadoc.jar release_notes.txt
+                jar uf ${'$'}ARTIFACT_PATH ${'$'}RELEASE_NOTES_PATH
                 
                 # checksum
-                sha256sum target/whatsapp-business-java-api-javadoc.jar > checksum.txt
+                sha256sum ${'$'}ARTIFACT_PATH > checksum.txt
                 cat checksum.txt
             """.trimIndent()
             dockerImage = "maven:3-eclipse-temurin-17"
