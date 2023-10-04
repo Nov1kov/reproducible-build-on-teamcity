@@ -109,22 +109,13 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 set -e
                 
                 # generate documentation
-                mvn clean javadoc:javadoc
+                mvn clean javadoc:jar -Dproject.build.outputTimestamp="2023-01-01T00:00:00Z"
                 
                 # add release notes to archive
-                mv release_notes.txt javadoc/.
-                
-                # archive documentation
-                apt-get update && apt-get install zip strip-nondeterminism -y --no-install-recommends
-                cd javadoc
-                zip -r ../javadoc.zip *
-                cd ..
-                
-                # strip-nondeterminism
-                strip-nondeterminism javadoc.zip
+                jar uf target/whatsapp-business-java-api-javadoc.jar release_notes.txt
                 
                 # checksum
-                sha256sum javadoc.zip > checksum.txt
+                sha256sum target/whatsapp-business-java-api-javadoc.jar > checksum.txt
                 cat checksum.txt
             """.trimIndent()
             dockerImage = "maven:3-eclipse-temurin-17"
