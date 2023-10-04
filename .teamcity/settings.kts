@@ -108,8 +108,14 @@ object WhatsappBusinessJavaApi_Build : BuildType({
                 #!/bin/bash
                 set -e
                 
+                # get cuurrent time of commit
+                commit_time=${'$'}(git log -1 --format="%ai" HEAD)
+                
                 # generate documentation
-                mvn clean javadoc:jar -Dproject.build.outputTimestamp="2023-01-01T00:00:00Z"
+                mvn clean javadoc:jar -Dproject.build.outputTimestamp="${'$'}{commit_time}"
+                
+                # change data modify in release_notes file
+                touch -d "${'$'}{commit_time}" release_notes.txt
                 
                 # add release notes to archive
                 jar uf target/whatsapp-business-java-api-javadoc.jar release_notes.txt
